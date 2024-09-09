@@ -1,0 +1,11 @@
+pre-commit:
+  commands:
+    format:
+      glob: "*"
+      run: npx biome format --write {staged_files}
+      stage_fixed: true
+    lint:
+      tags: backend style
+      glob: "*.{mts}"
+      run: npx biome lint --write {staged_files}
+      stage_fixed: true

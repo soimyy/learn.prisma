@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
   await prisma.user.create({
@@ -14,24 +14,24 @@ async function main() {
         create: { bio: 'I like turtles' },
       },
     },
-  })
+  });
 
   const allUsers = await prisma.user.findMany({
     include: {
       posts: true,
-      profile: true
-    }
-  })
+      profile: true,
+    },
+  });
 
-  console.dir(allUsers, { depth: null })
+  console.dir(allUsers, { depth: null });
 }
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
