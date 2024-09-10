@@ -6,14 +6,21 @@
   "type": "module",
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
+    "@types/express": "^4.17.21",
     "@types/node": "^22.5.4",
     "lefthook": "^1.7.15",
-    "prisma": "^5.19.1",
     "tsx": "^4.19.0",
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "prisma": "^5.19.1",
     "@prisma/client": "^5.19.1",
     "express": "^4.19.2"
+  },
+  "scripts": {
+    "develop": "tsx watch src/index.mts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed/init.mts"
   }
 }

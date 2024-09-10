@@ -1,37 +1,11 @@
-import { PrismaClient } from '@prisma/client';
+import express from 'express';
+import * as routers from './routers/index.mjs';
 
-const prisma = new PrismaClient();
+const app = express();
+const port = 3000;
 
-async function main() {
-  await prisma.user.create({
-    data: {
-      name: 'Alice',
-      email: 'alice@prisma.io',
-      posts: {
-        create: { title: 'Hello World' },
-      },
-      profile: {
-        create: { bio: 'I like turtles' },
-      },
-    },
-  });
+app.use(routers.healthcheck).use(routers.user);
 
-  const allUsers = await prisma.user.findMany({
-    include: {
-      posts: true,
-      profile: true,
-    },
-  });
-
-  console.dir(allUsers, { depth: null });
-}
-
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
